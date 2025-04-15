@@ -15,3 +15,7 @@ const configDb: ConfigDb = {
         password: '',
     },
 }
+export {
+    ConfigDb,
+    configDb
+}

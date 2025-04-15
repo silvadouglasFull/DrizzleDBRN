@@ -6,12 +6,14 @@
     "paths": {
       "@components/*": ["src/components/*"],
       "@db/*": ["src/database/src/*"],
-      "@dbClient": ["src/database/src/client"],
-      "@dbMigrations": ["src/database/src/migrations"],
-      "@dbRepositories": ["src/database/src/repositories"],
-      "@dbSchemas": ["src/database/src/schemas"],
-      "@dbUsersSchema": ["src/database/src/schemas/users"],
-      "@dbSeeders": ["src/database/src/seeders"]
+      "@dbClient/*": ["src/database/src/client/*"],
+      "@dbInstance/*": ["src/database/src/instance/*"],
+      "@dbMigrations/*": ["src/database/src/migrations/*"],
+      "@dbRepositories/*": ["src/database/src/repositories/*"],
+      "@dbSchemas/*": ["src/database/src/schemas/*"],
+      "@dbUsersSchema/*": ["src/database/src/schemas/users/*"],
+      "@dbSeeders/*": ["src/database/src/seeders/*"],
+      "@config/*": ["src/shared/config/*"]
     }
   }
 }
