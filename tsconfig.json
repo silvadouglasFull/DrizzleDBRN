@@ -1,6 +1,17 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["src/components/*"],
+      "@db/*": ["src/database/src/*"],
+      "@dbClient": ["src/database/src/client"],
+      "@dbMigrations": ["src/database/src/migrations"],
+      "@dbRepositories": ["src/database/src/repositories"],
+      "@dbSchemas": ["src/database/src/schemas"],
+      "@dbUsersSchema": ["src/database/src/schemas/users"],
+      "@dbSeeders": ["src/database/src/seeders"]
+    }
   }
 }
