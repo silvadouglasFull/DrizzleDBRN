@@ -16,5 +16,4 @@ class Query implements QueryUsersInstanceInterface {
 export {
     QueryUsersInstanceInterface
 };
-const query = new Query(db)
-export default query.query
+export default new Query(db)

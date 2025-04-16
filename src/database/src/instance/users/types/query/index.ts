@@ -4,7 +4,6 @@ type QueryDBInstance = typeof db
 type QueryInstance = typeof db.query.user
 type Query = typeof query
 export {
-    QueryDBInstance,
-    QueryInstance,
-    Query
+    Query, QueryDBInstance,
+    QueryInstance
 }

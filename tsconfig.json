@@ -14,6 +14,7 @@
       "@dbSchemas/*": ["src/database/src/schemas/*"],
       "@dbUsersSchema/*": ["src/database/src/schemas/users/*"],
       "@dbSeeders/*": ["src/database/src/seeders/*"],
+      "@dbUtils/*": ["src/database/src/utils/*"],
       "@config/*": ["src/shared/config/*"]
     }
   }
