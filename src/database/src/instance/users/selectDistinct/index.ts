@@ -12,5 +12,7 @@ class Select implements SelectDistinctInterface {
         return this.db.selectDistinct
     }
 }
-const selectDistinct = new Select(db)
-export default selectDistinct.selectDistinct
+export {
+    SelectDistinctInterface
+};
+export default new Select(db)

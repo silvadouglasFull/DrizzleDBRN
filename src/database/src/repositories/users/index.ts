@@ -1,7 +1,6 @@
 import Query, { QueryUsersInstanceInterface } from "@dbInstance/users/query";
 import Select, { SelectInterface } from '@dbInstance/users/select';
-import selectDistinct from '@dbInstance/users/selectDistinct';
-import { SelectDistinct } from "@dbInstance/users/types/selectDistinct";
+import SelectDistinct, { SelectDistinctInterface } from '@dbInstance/users/selectDistinct';
 import user from '@dbUsersSchema/index';
 import { User } from '@dbUsersSchema/types';
 import createFieldsObject from "@dbUtils/users/createFieldsObject";
@@ -12,8 +11,12 @@ interface UsersRepositoryInterface {
     select<K extends keyof User>(fields: K[]): Promise<Pick<User, K>[]>
 }
 class UsersRepository implements UsersRepositoryInterface {
-    constructor(private query: QueryUsersInstanceInterface, private select_: SelectInterface, private selectDistinct_: SelectDistinct, private createFieldsObject: CreateFieldsObject) {
-        this.selectDistinct_ = selectDistinct_
+    constructor(
+        private query: QueryUsersInstanceInterface,
+        private select_: SelectInterface,
+        private selectDistinct_: SelectDistinctInterface,
+        private createFieldsObject: CreateFieldsObject
+    ) {
         this.createFieldsObject = createFieldsObject
     }
     async findMany(): Promise<User[]> {
@@ -27,7 +30,7 @@ class UsersRepository implements UsersRepositoryInterface {
         return result as Pick<User, K>[];
     }
     async selectDistinct() {
-        return this.selectDistinct_().from(user).groupBy()
+        return this.selectDistinct_.selectDistinct().from(user).groupBy()
     }
 }
-const User = new UsersRepository(Query, Select, selectDistinct, createFieldsObject)
+const User = new UsersRepository(Query, Select, SelectDistinct, createFieldsObject)
