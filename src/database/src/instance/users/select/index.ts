@@ -12,5 +12,7 @@ class Select implements SelectInterface {
         return this.db.select
     }
 }
-const select = new Select(db)
-export default select.select
+export {
+    SelectInterface
+};
+export default new Select(db)
