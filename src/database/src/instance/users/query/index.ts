@@ -1,4 +1,4 @@
-import db from "@db/instance/users/db";
+import db from "@dbInstance/users/db";
 import { QueryDBInstance, QueryInstance } from "@dbInstance/users/types/query";
 
 interface QueryUsersInstanceInterface {
@@ -14,7 +14,7 @@ class Query implements QueryUsersInstanceInterface {
     }
 }
 export {
-    QueryUsersInstanceInterface,
-}
+    QueryUsersInstanceInterface
+};
 const query = new Query(db)
 export default query.query

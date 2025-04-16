@@ -1,4 +1,4 @@
-import db from "@db/instance/users/db";
+import db from "@dbInstance/users/db";
 import { QueryDBInstance } from "@dbInstance/users/types/db";
 import { SelectInstance } from "@dbInstance/users/types/select";
 interface SelectInterface {

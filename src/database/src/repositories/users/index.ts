@@ -1,9 +1,9 @@
-import { User } from '@dbSchemas/users/types/users';
-import { Query } from '@db/instance/users/types/query';
 import query from "@db/instance/users/query";
-import { Select } from '@db/instance/users/types/select';
 import select from '@db/instance/users/select';
+import { Query } from '@db/instance/users/types/query';
+import { Select } from '@db/instance/users/types/select';
 import user from '@db/schemas/users';
+import { User } from '@dbSchemas/users/types/users';
 interface UsersRepositoryInterface {
     findMany(): Promise<User[]>
     findFirst(): Promise<User | undefined>

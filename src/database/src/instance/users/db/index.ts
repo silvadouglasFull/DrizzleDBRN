@@ -1,6 +1,6 @@
-import { drizzle } from "drizzle-orm/expo-sqlite";
 import expo from "@db/client/sqlLite";
-import user from "@db/schemas/users";
+import user from "@dbUsersSchema/index";
+import { drizzle } from "drizzle-orm/expo-sqlite";
 
 const schema = { user };
 
