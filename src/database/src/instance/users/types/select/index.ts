@@ -1,5 +1,5 @@
+import select from "@db/instance/users/read/select";
 import db from "@dbInstance/users/db";
-import select from "@dbInstance/users/select";
 type SelectInstance = typeof db.select
 type Select = typeof select
 export {

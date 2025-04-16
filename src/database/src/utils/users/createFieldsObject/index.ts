@@ -13,5 +13,7 @@ class CreateFieldsObject implements CreateFieldsObjectInterface {
         }
     }
 }
-const createFieldsObject = new CreateFieldsObject().createObject
-export default createFieldsObject
+export {
+    CreateFieldsObjectInterface
+};
+export default new CreateFieldsObject()
