@@ -11,6 +11,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import js from "@eslint/js";
 import { FlatCompat } from "@eslint/eslintrc";
+import simpleImportSort from "eslint-plugin-simple-import-sort";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -37,6 +38,7 @@ export default defineConfig([globalIgnores([]), {
         "react-native": fixupPluginRules(reactNative),
         "unused-imports": unusedImports,
         import: fixupPluginRules(_import),
+        "simple-import-sort": fixupPluginRules(simpleImportSort),
         filenames,
     },
 
@@ -86,5 +88,27 @@ export default defineConfig([globalIgnores([]), {
         "unused-imports/no-unused-imports": "warn",
         "react/react-in-jsx-scope": "off",
         "filenames/match-regex": ["error", "^[a-z][a-zA-Z0-9]+$", true],
+        "simple-import-sort/imports": [
+            "warn",
+            {
+                groups: [
+                    // React e React Native no topo
+                    ["^react$", "^react-native$"],
+
+                    // Imports de pacotes (node_modules) com default (ex: import x from '...')
+                    ["^\\u0000", "^@?\\w.*$"],
+
+                    // Imports absolutos e relativos com default
+                    ["^@/(.*)$", "^[./].*[^}{]$"],
+
+                    // Imports com destructuring (com chaves)
+                    ["^[./].*\\{.*\\}$"],
+                ],
+            },
+        ],
+
+        "simple-import-sort/exports": "warn",
+        "import/first": "error",
+        "import/no-duplicates": "error",
     }
 }]);

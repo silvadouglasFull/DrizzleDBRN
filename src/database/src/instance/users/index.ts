@@ -1,27 +1,14 @@
-import { drizzle } from "drizzle-orm/expo-sqlite";
-import expo from "@db/client/sqlLite";
-import user from "@db/schemas/users";
-import { InstanceDataBase, InstanceUsersDataBase } from "@dbInstance/users/types";
+import db from "@dbInstance/users/db"
+import { QueryDBInstance } from "@dbInstance/users/types/query";
 
-const schema = { user };
-
-const db = drizzle(expo, { schema })
-interface DataBaseInterface {
-    get instance(): InstanceUsersDataBase
-}
-class DataBase implements DataBaseInterface {
-    private db: InstanceDataBase
-    constructor(db: InstanceDataBase) {
+class DataBase {
+    constructor(private db: QueryDBInstance) {
         this.db = db
     }
-    public get instance() {
+    public get query() {
         return this.db.query.user;
     }
 }
 
-const UsersInstance = new DataBase(db).instance;
-export {
-    db,
-    DataBaseInterface,
-}
+const UsersInstance = new DataBase(db);
 export default UsersInstance;
