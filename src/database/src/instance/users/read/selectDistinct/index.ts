@@ -4,7 +4,7 @@ import { SelectDistinctInstance } from "@dbInstance/users/types/selectDistinct";
 interface SelectDistinctInterface {
     get selectDistinct(): SelectDistinctInstance
 }
-class Select implements SelectDistinctInterface {
+class SelectDistinct implements SelectDistinctInterface {
     constructor(private db: QueryDBInstance) {
         this.db = db
     }
@@ -15,4 +15,4 @@ class Select implements SelectDistinctInterface {
 export {
     SelectDistinctInterface
 };
-export default new Select(db)
+export default new SelectDistinct(db)
