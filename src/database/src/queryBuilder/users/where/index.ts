@@ -9,10 +9,10 @@ import operators from "@dbUtils/queryBuilder/operators";
 import { OperatorsConst } from "@dbUtils/queryBuilder/operators/types";
 import isVaid, { IsValidInterface } from "@dbUtils/queryBuilder/validValue";
 
-interface WhereQueryBuilder {
+interface WhereQueryBuilderInterface {
     where(rops: Wheres | Wheres[]): any;
 }
-class Where implements WhereQueryBuilder {
+class Where implements WhereQueryBuilderInterface {
     constructor(
         private equal: EqualInterface,
         private notEqual: NotEqualInterface,
@@ -69,6 +69,9 @@ class Where implements WhereQueryBuilder {
     }
 
 }
+export {
+    WhereQueryBuilderInterface
+};
 export default new Where(
     equal,
     notEqual,
