@@ -7,7 +7,8 @@ const user = sqliteTable("users", {
     usu_ativo: integer("usu_ativo").default(0),
     usu_set: integer("usu_set").notNull(),
     usu_img: text("usu_img").default(""),
-    usu_gp: integer("usu_gp").notNull()
+    usu_gp: integer("usu_gp").notNull(),
+    password: text("password").default("")
 });
 
 export default user
