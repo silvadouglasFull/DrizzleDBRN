@@ -1,4 +1,4 @@
-import { Value } from "@dbUtils/queryBuilder/validValue/types";
+import { Value } from "@db/utils/users/queryBuilder/validValue/types";
 
 interface IsValidInterface {
     isValid(value: Value): boolean
