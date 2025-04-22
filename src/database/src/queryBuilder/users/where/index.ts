@@ -1,5 +1,6 @@
 import user from "@db/schemas/users";
 import equal, { EqualInterface } from "@dbOperators/equal";
+import notEqual, { NotEqualInterface } from "@dbOperators/notEqual";
 import { WhereClause, Wheres } from "@dbQueryBuilder/operators/types";
 import operators from "@dbUtils/queryBuilder/operators";
 import { OperatorsConst } from "@dbUtils/queryBuilder/operators/types";
@@ -9,10 +10,13 @@ interface WhereQueryBuilder {
     where(rops: Wheres | Wheres[]): any;
 }
 class Where implements WhereQueryBuilder {
-    constructor(private equal: EqualInterface, private isValid: IsValidInterface, private operator: OperatorsConst) {
+    constructor(private equal: EqualInterface, private notEqual: NotEqualInterface, private isValid: IsValidInterface, private operator: OperatorsConst) {
         this.operator.push({
             action: this.equal.eq,
             operator: '=',
+        }, {
+            action: this.notEqual.ne,
+            operator: '<>',
         })
     }
     public where(clauses: Wheres): any {
@@ -40,4 +44,4 @@ class Where implements WhereQueryBuilder {
     }
 
 }
-export default new Where(equal, isVaid, operators)
+export default new Where(equal, notEqual, isVaid, operators)
