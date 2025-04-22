@@ -1,3 +1,6 @@
+import operators from "@db/utils/users/queryBuilder/operators";
+import { OperatorsConst } from "@db/utils/users/queryBuilder/operators/types";
+import isVaid, { IsValidInterface } from "@db/utils/users/queryBuilder/validValue";
 import equal, { EqualInterface } from "@dbOperators/equal";
 import greaterThan, { GreaterThanInterface } from "@dbOperators/greaterThan";
 import greaterThanOrEqualto, { GreaterThanOrEqualToInterface } from "@dbOperators/greaterThanOrEqualto";
@@ -5,9 +8,6 @@ import lessThan, { LessThanOperatorInterface } from "@dbOperators/lessThan";
 import notEqual, { NotEqualInterface } from "@dbOperators/notEqual";
 import { WhereClause, Wheres } from "@dbQueryBuilder/users/operators/types";
 import user from "@dbUsersSchema/index";
-import operators from "@dbUtils/queryBuilder/operators";
-import { OperatorsConst } from "@dbUtils/queryBuilder/operators/types";
-import isVaid, { IsValidInterface } from "@dbUtils/queryBuilder/validValue";
 
 interface WhereQueryBuilderInterface {
     where(rops: Wheres | Wheres[]): any;
