@@ -1,8 +1,8 @@
+import { WhereClause, Wheres } from "@db/queryBuilder/empresa/where/operators/types";
 import operators from "@db/utils/users/queryBuilder/operators";
 import { OperatorsConst } from "@db/utils/users/queryBuilder/operators/types";
 import empresa from "@dbEmpresaSchema/index";
 import equal, { EqualInterface } from "@dbOperators/equal";
-import { WhereClause, Wheres } from "@dbQueryBuilder/empresa/operators/types";
 import isVaid, { IsValidInterface } from "@dbUtils/empresa/queryBuilder/validValue";
 
 interface WhereQueryBuilderInterface {

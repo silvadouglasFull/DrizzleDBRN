@@ -1,8 +1,8 @@
+import { Wheres } from "@db/queryBuilder/empresa/where/operators/types"
 import empresa from "@dbEmpresaSchema/index"
 import { Empresa } from "@dbEmpresaSchema/types"
 import query, { QueryEmpresaInstanceInterface } from "@dbInstance/empresa/read/query"
 import select, { SelectInterface } from "@dbInstance/empresa/read/select"
-import { Wheres } from "@dbQueryBuilder/empresa/operators/types"
 import where, { WhereQueryBuilderInterface } from "@dbQueryBuilder/empresa/where"
 import createFieldsObject, { CreateFieldsObjectInterface } from "@dbUtils/empresa/createFieldsObject"
 interface EmpresaRepositoryInterface {
