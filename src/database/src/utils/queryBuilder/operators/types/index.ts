@@ -1,11 +1,12 @@
 import { EqualOperatorType } from "@dbOperators/equal/types";
+import { GreaterThanOperatorType } from "@dbOperators/greaterThan/types";
 import { NotEqualOperatorType } from "@dbOperators/notEqual/types";
 import { Operator } from "@dbQueryBuilder/operators/types";
 import operators from "..";
 type OperatorsConst = typeof operators
 type Operators = Array<{
     operator: Operator,
-    action: EqualOperatorType | NotEqualOperatorType | undefined
+    action: EqualOperatorType | NotEqualOperatorType | GreaterThanOperatorType | undefined
 }>
 export {
     OperatorsConst
