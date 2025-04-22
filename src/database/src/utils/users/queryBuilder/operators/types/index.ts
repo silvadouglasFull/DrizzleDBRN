@@ -1,4 +1,4 @@
-import { Operator } from "@db/queryBuilder/users/operators/types";
+import { Operator } from "@db/queryBuilder/users/where/operators/types";
 import { EqualOperatorType } from "@dbOperators/equal/types";
 import { GreaterThanOperatorType } from "@dbOperators/greaterThan/types";
 import { GreaterThanOrEqualtoOperatorType } from "@dbOperators/greaterThanOrEqualto/types";

@@ -1,7 +1,7 @@
 import query, { QueryUsersInstanceInterface } from "@db/instance/users/read/query";
 import select, { SelectInterface } from '@db/instance/users/read/select';
 import selectDistinct, { SelectDistinctInterface } from '@db/instance/users/read/selectDistinct';
-import { Wheres } from "@db/queryBuilder/users/operators/types";
+import { Wheres } from "@db/queryBuilder/users/where/operators/types";
 import where, { WhereQueryBuilderInterface } from "@dbQueryBuilder/users/where";
 import user from '@dbUsersSchema/index';
 import { User as UserType } from '@dbUsersSchema/types';
