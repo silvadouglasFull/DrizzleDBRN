@@ -1,7 +1,7 @@
 import query, { QueryUsersInstanceInterface } from "@db/instance/users/read/query";
 import select, { SelectInterface } from '@db/instance/users/read/select';
 import selectDistinct, { SelectDistinctInterface } from '@db/instance/users/read/selectDistinct';
-import { Wheres } from "@dbQueryBuilder/operators/types";
+import { Wheres } from "@db/queryBuilder/users/operators/types";
 import where, { WhereQueryBuilderInterface } from "@dbQueryBuilder/users/where";
 import user from '@dbUsersSchema/index';
 import { User as UserType } from '@dbUsersSchema/types';
@@ -43,10 +43,11 @@ class UsersRepository implements UsersRepositoryInterface {
         fields: K[], wheres: Wheres[]
     ): Promise<Pick<UserType, K>[]> {
         const fieldsObj = this.createFieldsObject.createObject(fields);
-        let result = await this.select_.select(fieldsObj).from(user)
+        const queryBuilder = this.select_.select(fieldsObj).from(user);
         if (wheres.length) {
-            result = await this.select_.select(fieldsObj).from(user).where(this.where.where(wheres))
+            queryBuilder.where(this.where.where(wheres));
         }
+        const result = await queryBuilder;
         return result as Pick<UserType, K>[]
     }
 

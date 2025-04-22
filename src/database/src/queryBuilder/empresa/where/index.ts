@@ -1,10 +1,6 @@
+import empresa from "@dbEmpresaSchema/index";
 import equal, { EqualInterface } from "@dbOperators/equal";
-import greaterThan, { GreaterThanInterface } from "@dbOperators/greaterThan";
-import greaterThanOrEqualto, { GreaterThanOrEqualToInterface } from "@dbOperators/greaterThanOrEqualto";
-import lessThan, { LessThanOperatorInterface } from "@dbOperators/lessThan";
-import notEqual, { NotEqualInterface } from "@dbOperators/notEqual";
-import { WhereClause, Wheres } from "@dbQueryBuilder/users/operators/types";
-import user from "@dbUsersSchema/index";
+import { WhereClause, Wheres } from "@dbQueryBuilder/empresa/operators/types";
 import operators from "@dbUtils/queryBuilder/operators";
 import { OperatorsConst } from "@dbUtils/queryBuilder/operators/types";
 import isVaid, { IsValidInterface } from "@dbUtils/queryBuilder/validValue";
@@ -15,32 +11,12 @@ interface WhereQueryBuilderInterface {
 class Where implements WhereQueryBuilderInterface {
     constructor(
         private equal: EqualInterface,
-        private notEqual: NotEqualInterface,
-        private greaterThan: GreaterThanInterface,
-        private greaterThanOrEqualto: GreaterThanOrEqualToInterface,
-        private lessThan: LessThanOperatorInterface,
         private isValid: IsValidInterface,
         private operator: OperatorsConst) {
         this.operator.push(
             {
                 action: this.equal.eq,
                 operator: '=',
-            },
-            {
-                action: this.notEqual.ne,
-                operator: '<>',
-            },
-            {
-                action: this.greaterThan.gt,
-                operator: '>'
-            },
-            {
-                action: this.greaterThanOrEqualto.gte,
-                operator: '>='
-            },
-            {
-                action: this.lessThan.lt,
-                operator: '<'
             }
         )
     }
@@ -54,7 +30,7 @@ class Where implements WhereQueryBuilderInterface {
                 if (!this.isValid.isValid(value)) {
                     throw new Error(`O valor ${value} da coluna ${column} não é valido`);
                 }
-                return operatorFn(user[column], value ?? '');
+                return operatorFn(empresa[column], value ?? '');
             });
         }
         const [column, operator, value] = clauses as WhereClause;
@@ -65,7 +41,7 @@ class Where implements WhereQueryBuilderInterface {
         if (!this.isValid.isValid(value)) {
             throw new Error(`O valor ${value} da coluna ${column} não é valido`);
         }
-        return operatorFn(user[column], value ?? '');
+        return operatorFn(empresa[column], value ?? '');
     }
 
 }
@@ -74,9 +50,6 @@ export {
 };
 export default new Where(
     equal,
-    notEqual,
-    greaterThan,
-    greaterThanOrEqualto,
-    lessThan,
     isVaid,
-    operators)
+    operators
+)
