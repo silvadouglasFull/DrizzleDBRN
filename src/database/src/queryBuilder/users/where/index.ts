@@ -1,10 +1,10 @@
-import user from "@db/schemas/users";
 import equal, { EqualInterface } from "@dbOperators/equal";
 import greaterThan, { GreaterThanInterface } from "@dbOperators/greaterThan";
 import greaterThanOrEqualto, { GreaterThanOrEqualToInterface } from "@dbOperators/greaterThanOrEqualto";
 import lessThan, { LessThanOperatorInterface } from "@dbOperators/lessThan";
 import notEqual, { NotEqualInterface } from "@dbOperators/notEqual";
 import { WhereClause, Wheres } from "@dbQueryBuilder/operators/types";
+import user from "@dbUsersSchema/index";
 import operators from "@dbUtils/queryBuilder/operators";
 import { OperatorsConst } from "@dbUtils/queryBuilder/operators/types";
 import isVaid, { IsValidInterface } from "@dbUtils/queryBuilder/validValue";
