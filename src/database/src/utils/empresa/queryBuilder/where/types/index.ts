@@ -4,7 +4,7 @@ import { GreaterThanOperatorType } from "@dbOperators/greaterThan/types";
 import { GreaterThanOrEqualtoOperatorType } from "@dbOperators/greaterThanOrEqualto/types";
 import { LessThanOperatorType } from "@dbOperators/lessThan/types";
 import { NotEqualOperatorType } from "@dbOperators/notEqual/types";
-import operators from "..";
+import operators from "@dbUtils/users/queryBuilder/operators/where";
 type OperatorsConst = typeof operators
 type Operators = Array<{
     operator: Operator,
