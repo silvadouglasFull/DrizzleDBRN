@@ -27,17 +27,16 @@ class Where implements WhereQueryBuilder {
                 }
                 return operatorFn(user[column], value ?? '');
             });
-        } else {
-            const [column, operator, value] = clauses as WhereClause;
-            const operatorFn = this.operator.find(op => op.operator === operator)?.action;
-            if (!operatorFn) {
-                throw new Error(`Operador não suportado: ${operator}`);
-            }
-            if (!this.isValid.isValid(value)) {
-                throw new Error(`O valor ${value} da coluna ${column} não é valido`);
-            }
-            return operatorFn(user[column], value ?? '');
         }
+        const [column, operator, value] = clauses as WhereClause;
+        const operatorFn = this.operator.find(op => op.operator === operator)?.action;
+        if (!operatorFn) {
+            throw new Error(`Operador não suportado: ${operator}`);
+        }
+        if (!this.isValid.isValid(value)) {
+            throw new Error(`O valor ${value} da coluna ${column} não é valido`);
+        }
+        return operatorFn(user[column], value ?? '');
     }
 
 }
