@@ -2,6 +2,7 @@ import user from "@db/schemas/users";
 import equal, { EqualInterface } from "@dbOperators/equal";
 import greaterThan, { GreaterThanInterface } from "@dbOperators/greaterThan";
 import greaterThanOrEqualto, { GreaterThanOrEqualToInterface } from "@dbOperators/greaterThanOrEqualto";
+import lessThan, { LessThanOperatorInterface } from "@dbOperators/lessThan";
 import notEqual, { NotEqualInterface } from "@dbOperators/notEqual";
 import { WhereClause, Wheres } from "@dbQueryBuilder/operators/types";
 import operators from "@dbUtils/queryBuilder/operators";
@@ -17,6 +18,7 @@ class Where implements WhereQueryBuilder {
         private notEqual: NotEqualInterface,
         private greaterThan: GreaterThanInterface,
         private greaterThanOrEqualto: GreaterThanOrEqualToInterface,
+        private lessThan: LessThanOperatorInterface,
         private isValid: IsValidInterface,
         private operator: OperatorsConst) {
         this.operator.push(
@@ -35,6 +37,10 @@ class Where implements WhereQueryBuilder {
             {
                 action: this.greaterThanOrEqualto.gte,
                 operator: '>='
+            },
+            {
+                action: this.lessThan.lt,
+                operator: '<'
             }
         )
     }
@@ -68,5 +74,6 @@ export default new Where(
     notEqual,
     greaterThan,
     greaterThanOrEqualto,
+    lessThan,
     isVaid,
     operators)
