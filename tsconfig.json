@@ -15,6 +15,7 @@
       "@dbQueryBuilder/*": ["src/database/src/queryBuilder/*"],
       "@dbSchemas/*": ["src/database/src/schemas/*"],
       "@dbUsersSchema/*": ["src/database/src/schemas/users/*"],
+      "@dbEmpresaSchema/*": ["src/database/src/schemas/empresa/*"],
       "@dbSeeders/*": ["src/database/src/seeders/*"],
       "@dbUtils/*": ["src/database/src/utils/*"],
       "@config/*": ["src/shared/config/*"]

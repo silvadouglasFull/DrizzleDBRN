@@ -1,4 +1,4 @@
-import db from "@dbInstance/users/db"
+import db from "@dbInstance/users/db";
 import { QueryDBInstance } from "@dbInstance/users/types/query";
 
 class DataBase {
