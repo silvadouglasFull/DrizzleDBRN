@@ -4,12 +4,12 @@ import { SQL } from "drizzle-orm"
 import { ApplyJoinInterface } from "../applyJoin"
 
 interface JoinQueryBuilderInterface {
-    join(joins: Joins): SQL | SQL[]
+    join(joins: Joins): SQL | SQL[] | undefined
 }
 class JoinQueryBuilder implements JoinQueryBuilderInterface {
     constructor(
         private apply: ApplyJoinInterface) { }
-    join(joins: Joins): SQL | SQL[] {
+    join(joins: Joins): SQL | SQL[] | undefined {
         if (Array.isArray(joins[0])) {
             return (joins as Array<JoinClause>).map(this.apply.apply);
         }
