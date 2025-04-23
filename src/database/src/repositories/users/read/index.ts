@@ -3,6 +3,7 @@ import select, { SelectInterface } from '@db/instance/users/read/select';
 import selectDistinct, { SelectDistinctInterface } from '@db/instance/users/read/selectDistinct';
 import { Wheres } from "@db/queryBuilder/users/where/operators/types";
 import empresa from "@db/schemas/empresa";
+import { Empresa } from "@dbEmpresaSchema/types";
 import joinEmpresa, { JoinQueryBuilderInterface } from "@dbQueryBuilder/users/join/joinEmpresa";
 import where, { WhereQueryBuilderInterface } from "@dbQueryBuilder/users/where";
 import user from '@dbUsersSchema/index';
@@ -49,21 +50,25 @@ class UsersRepository implements UsersRepositoryInterface {
         const fieldsObj = this.createFieldsObject.createObject(fields) || {};
         const queryBuilder = this.select_.select(fieldsObj).from(user);
         if (wheres.length) {
-            queryBuilder.where(this.where.where(wheres));
+            const whereClause = this.where.where(wheres);
+
+            if (whereClause) {
+                queryBuilder.where(whereClause)
+            }
         }
         const result = await queryBuilder;
         return result as Pick<UserType, K>[]
     }
     async joinEmpresa<K extends keyof UserType>(
         fields: K[] = [], wheres: Wheres[] = []
-    ): Promise<Pick<UserType, K>[]> {
+    ): Promise<Pick<UserType & Empresa, K>[]> {
         const fieldsObj = this.createFieldsObject.createObject(fields) || {};
         const queryBuilder = this.select_.select(fieldsObj).from(user).innerJoin(empresa, this.join.join(['usu_emp', '=', 'id']));
         if (wheres.length) {
             queryBuilder.where(this.where.where(wheres));
         }
         const result = await queryBuilder;
-        return result as Pick<UserType, K>[]
+        return result as Pick<UserType & Empresa, K>[]
     }
 }
 const User = new UsersRepository(query, select, selectDistinct, createFieldsObject, where, joinEmpresa)

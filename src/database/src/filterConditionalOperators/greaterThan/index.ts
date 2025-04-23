@@ -1,4 +1,4 @@
-import { GreaterThanOperatorType } from "@db/filterConditionalOperators/greaterThan/types";
+import { GreaterThanOperatorType } from "@dbFilterConditionalOperators/greaterThan/types";
 import { gt } from "drizzle-orm";
 
 interface GreaterThanInterface {

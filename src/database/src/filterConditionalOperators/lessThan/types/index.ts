@@ -1,4 +1,4 @@
-import lessThan from "@db/filterConditionalOperators/lessThan";
+import lessThan from "@dbFilterConditionalOperators/lessThan";
 import { lt } from "drizzle-orm";
 type LessThanOperatorType = typeof lt
 type LessThanOperator = typeof lessThan

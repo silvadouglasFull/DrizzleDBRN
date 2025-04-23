@@ -1,5 +1,5 @@
-import equal, { EqualInterface } from "@db/filterConditionalOperators/equal"
 import empresa from "@dbEmpresaSchema/index"
+import equal, { EqualInterface } from "@dbFilterConditionalOperators/equal"
 import { JoinClause } from "@dbQueryBuilder/users/join/joinEmpresa//operators/types"
 import user from "@dbUsersSchema/index"
 import isValid, { IsValidInterface } from "@dbUtils/users/queryBuilder/joinEmpresa/validValue"

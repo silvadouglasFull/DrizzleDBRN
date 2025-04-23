@@ -1,4 +1,4 @@
-import { EqualOperatorType } from "@db/filterConditionalOperators/equal/types";
+import { EqualOperatorType } from "@dbFilterConditionalOperators/equal/types";
 import { Operator } from "@dbQueryBuilder/users/where/operators/types";
 import operators from "@dbUtils/users/queryBuilder/operators/joinEmpresa";
 type OperatorsConst = typeof operators

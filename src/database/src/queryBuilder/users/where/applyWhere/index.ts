@@ -1,10 +1,10 @@
-import equal, { EqualInterface } from "@db/filterConditionalOperators/equal";
-import greaterThan, { GreaterThanInterface } from "@db/filterConditionalOperators/greaterThan";
-import greaterThanOrEqualto, { GreaterThanOrEqualToInterface } from "@db/filterConditionalOperators/greaterThanOrEqualto";
-import lessThan, { LessThanOperatorInterface } from "@db/filterConditionalOperators/lessThan";
-import notEqual, { NotEqualInterface } from "@db/filterConditionalOperators/notEqual";
 import { WhereClause } from "@db/queryBuilder/users/where/operators/types";
 import isVaid, { IsValidInterface } from "@db/utils/users/queryBuilder/validValue";
+import equal, { EqualInterface } from "@dbFilterConditionalOperators/equal";
+import greaterThan, { GreaterThanInterface } from "@dbFilterConditionalOperators/greaterThan";
+import greaterThanOrEqualto, { GreaterThanOrEqualToInterface } from "@dbFilterConditionalOperators/greaterThanOrEqualto";
+import lessThan, { LessThanOperatorInterface } from "@dbFilterConditionalOperators/lessThan";
+import notEqual, { NotEqualInterface } from "@dbFilterConditionalOperators/notEqual";
 import user from "@dbUsersSchema/index";
 import operators from "@dbUtils/users/queryBuilder/operators/where";
 import { OperatorsConst } from "@dbUtils/users/queryBuilder/operators/where/types";

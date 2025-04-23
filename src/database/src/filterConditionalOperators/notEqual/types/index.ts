@@ -1,4 +1,4 @@
-import notEqual from "@db/filterConditionalOperators/notEqual";
+import notEqual from "@dbFilterConditionalOperators/notEqual";
 import { ne } from "drizzle-orm";
 type NotEqualOperatorType = typeof ne
 type NotEqual = typeof notEqual

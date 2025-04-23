@@ -1,5 +1,5 @@
-import equal, { EqualInterface } from "@db/filterConditionalOperators/equal";
 import { WhereClause } from "@db/queryBuilder/setor/where/operators/types";
+import equal, { EqualInterface } from "@dbFilterConditionalOperators/equal";
 import setor from "@dbSetorSchema/index";
 import isVaid, { IsValidInterface } from "@dbUtils/setor/queryBuilder/validValue";
 import operators from "@dbUtils/setor/queryBuilder/where";

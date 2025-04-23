@@ -7,6 +7,9 @@
       "@components/*": ["src/components/*"],
       "@db/*": ["src/database/src/*"],
       "@dbClient/*": ["src/database/src/client/*"],
+      "@dbFilterConditionalOperators/*": [
+        "src/database/src/filterConditionalOperators/*"
+      ],
       "@dbConfig/*": ["src/database/src/shared/config/database/*"],
       "@dbInstance/*": ["src/database/src/instance/*"],
       "@dbMigrations/*": ["src/database/src/migrations/*"],
