@@ -46,7 +46,7 @@ class ApplyWhere implements ApplyWhereInterface {
         )
         this.apply = this.apply.bind(this);
     }
-    apply([column, operator, value]: WhereClause): SQL {
+    public apply([column, operator, value]: WhereClause): SQL {
         const operatorFn = this.operator.find(op => op.operator === operator)?.action;
         if (!operatorFn) {
             throw new Error(`Operador não suportado: ${operator}`);

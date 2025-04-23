@@ -1,55 +1,20 @@
-import { WhereClause, Wheres } from "@db/queryBuilder/setor/where/operators/types";
-import equal, { EqualInterface } from "@dbOperators/equal";
-import setor from "@dbSetorSchema/index";
-import isVaid, { IsValidInterface } from "@dbUtils/setor/queryBuilder/validValue";
-import operators from "@dbUtils/setor/queryBuilder/where";
-import { OperatorsConst } from "@dbUtils/setor/queryBuilder/where/types";
-
+import apply, { ApplyWhereInterface } from "@dbQueryBuilder/setor/where/applyWhere";
+import { WhereClause, Wheres } from "@dbQueryBuilder/setor/where/operators/types";
 interface WhereQueryBuilderInterface {
     where(rops: Wheres | Wheres[]): any;
 }
 class Where implements WhereQueryBuilderInterface {
-    constructor(
-        private equal: EqualInterface,
-        private isValid: IsValidInterface,
-        private operator: OperatorsConst) {
-        this.operator.push(
-            {
-                action: this.equal.eq,
-                operator: '=',
-            }
-        )
+    constructor(private apply: ApplyWhereInterface) {
     }
     public where(clauses: Wheres): any {
         if (Array.isArray(clauses[0])) {
-            return (clauses as Array<WhereClause>).map(([column, operator, value]) => {
-                const operatorFn = this.operator.find(op => op.operator === operator)?.action;
-                if (!operatorFn) {
-                    throw new Error(`Operador não suportado: ${operator}`);
-                }
-                if (!this.isValid.isValid(value)) {
-                    throw new Error(`O valor ${value} da coluna ${column} não é valido`);
-                }
-                return operatorFn(setor[column], value ?? '');
-            });
+            return (clauses as Array<WhereClause>).map(this.apply.apply);
         }
-        const [column, operator, value] = clauses as WhereClause;
-        const operatorFn = this.operator.find(op => op.operator === operator)?.action;
-        if (!operatorFn) {
-            throw new Error(`Operador não suportado: ${operator}`);
-        }
-        if (!this.isValid.isValid(value)) {
-            throw new Error(`O valor ${value} da coluna ${column} não é valido`);
-        }
-        return operatorFn(setor[column], value ?? '');
+        return this.apply.apply(clauses as WhereClause)
     }
 
 }
 export {
     WhereQueryBuilderInterface
 };
-export default new Where(
-    equal,
-    isVaid,
-    operators
-)
+export default new Where(apply)

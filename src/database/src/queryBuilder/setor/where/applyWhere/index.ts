@@ -1,12 +1,13 @@
-import empresa from "@dbEmpresaSchema/index";
+import { WhereClause } from "@db/queryBuilder/setor/where/operators/types";
 import equal, { EqualInterface } from "@dbOperators/equal";
-import { WhereClause } from "@dbQueryBuilder/empresa/where/operators/types";
-import operators from "@dbUtils/empresa/queryBuilder/operators/where";
-import isValid, { IsValidInterface } from "@dbUtils/empresa/queryBuilder/validValue";
-import { OperatorsConst } from "@dbUtils/empresa/queryBuilder/where/types";
+import setor from "@dbSetorSchema/index";
+import isVaid, { IsValidInterface } from "@dbUtils/setor/queryBuilder/validValue";
+import operators from "@dbUtils/setor/queryBuilder/where";
+import { OperatorsConst } from "@dbUtils/setor/queryBuilder/where/types";
 import { SQL } from "drizzle-orm";
+
 interface ApplyWhereInterface {
-    apply([column, operator, value]: WhereClause): SQL
+    apply(rops: WhereClause): SQL;
 }
 class ApplyWhere implements ApplyWhereInterface {
     constructor(
@@ -29,10 +30,15 @@ class ApplyWhere implements ApplyWhereInterface {
         if (!this.isValid.isValid(value)) {
             throw new Error(`O valor ${value} da coluna ${column} não é valido`);
         }
-        return operatorFn(empresa[column], value ?? '');
+        return operatorFn(setor[column], value ?? '');
     }
+
 }
 export {
     ApplyWhereInterface
 };
-export default new ApplyWhere(equal, isValid, operators)
+export default new ApplyWhere(
+    equal,
+    isVaid,
+    operators
+)
