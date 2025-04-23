@@ -1,82 +1,21 @@
-import { WhereClause, Wheres } from "@db/queryBuilder/users/where/operators/types";
-import operators from "@db/utils/users/queryBuilder/operators";
-import isVaid, { IsValidInterface } from "@db/utils/users/queryBuilder/validValue";
-import equal, { EqualInterface } from "@dbOperators/equal";
-import greaterThan, { GreaterThanInterface } from "@dbOperators/greaterThan";
-import greaterThanOrEqualto, { GreaterThanOrEqualToInterface } from "@dbOperators/greaterThanOrEqualto";
-import lessThan, { LessThanOperatorInterface } from "@dbOperators/lessThan";
-import notEqual, { NotEqualInterface } from "@dbOperators/notEqual";
-import user from "@dbUsersSchema/index";
-import { OperatorsConst } from "@dbUtils/users/queryBuilder/operators/where/types";
-
+import applyWhere, { ApplyWhereInterface } from "@dbQueryBuilder/users/where/applyWhere";
+import { WhereClause, Wheres } from "@dbQueryBuilder/users/where/operators/types";
+import { SQL } from "drizzle-orm";
 interface WhereQueryBuilderInterface {
-    where(rops: Wheres | Wheres[]): any;
+    where(rops: Wheres | Wheres[]): SQL | SQL[];
 }
 class Where implements WhereQueryBuilderInterface {
-    constructor(
-        private equal: EqualInterface,
-        private notEqual: NotEqualInterface,
-        private greaterThan: GreaterThanInterface,
-        private greaterThanOrEqualto: GreaterThanOrEqualToInterface,
-        private lessThan: LessThanOperatorInterface,
-        private isValid: IsValidInterface,
-        private operator: OperatorsConst) {
-        this.operator.push(
-            {
-                action: this.equal.eq,
-                operator: '=',
-            },
-            {
-                action: this.notEqual.ne,
-                operator: '<>',
-            },
-            {
-                action: this.greaterThan.gt,
-                operator: '>'
-            },
-            {
-                action: this.greaterThanOrEqualto.gte,
-                operator: '>='
-            },
-            {
-                action: this.lessThan.lt,
-                operator: '<'
-            }
-        )
+    constructor(private applyWhere: ApplyWhereInterface) {
     }
-    public where(clauses: Wheres): any {
+    public where(clauses: Wheres): SQL | SQL[] {
         if (Array.isArray(clauses[0])) {
-            return (clauses as Array<WhereClause>).map(([column, operator, value]) => {
-                const operatorFn = this.operator.find(op => op.operator === operator)?.action;
-                if (!operatorFn) {
-                    throw new Error(`Operador não suportado: ${operator}`);
-                }
-                if (!this.isValid.isValid(value)) {
-                    throw new Error(`O valor ${value} da coluna ${column} não é valido`);
-                }
-                return operatorFn(user[column], value ?? '');
-            });
+            return (clauses as Array<WhereClause>).map(this.applyWhere.apply);
         }
-        const [column, operator, value] = clauses as WhereClause;
-        const operatorFn = this.operator.find(op => op.operator === operator)?.action;
-        if (!operatorFn) {
-            throw new Error(`Operador não suportado: ${operator}`);
-        }
-        if (!this.isValid.isValid(value)) {
-            throw new Error(`O valor ${value} da coluna ${column} não é valido`);
-        }
-        return operatorFn(user[column], value ?? '');
+        return this.applyWhere.apply(clauses as WhereClause)
     }
 
 }
 export {
     WhereQueryBuilderInterface
 };
-export default new Where(
-    equal,
-    notEqual,
-    greaterThan,
-    greaterThanOrEqualto,
-    lessThan,
-    isVaid,
-    operators)
+export default new Where(applyWhere)

@@ -1,42 +1,22 @@
-import empresa from "@db/schemas/empresa/index"
-import equal, { EqualInterface } from "@dbOperators/equal"
+import applyJoin from "@dbQueryBuilder/users/join/applyJoin"
 import Joins, { JoinClause } from "@dbQueryBuilder/users/join/joinEmpresa//operators/types"
-import user from "@dbUsersSchema/index"
-import isValid, { IsValidInterface } from "@dbUtils/users/queryBuilder/joinEmpresa/validValue"
-import operators from "@dbUtils/users/queryBuilder/operators/joinEmpresa"
-import { OperatorsConst } from "@dbUtils/users/queryBuilder/operators/joinEmpresa/types"
+import { SQL } from "drizzle-orm"
+import { ApplyJoinInterface } from "../applyJoin"
+
 interface JoinQueryBuilderInterface {
-    join(joins: Joins): any
+    join(joins: Joins): SQL | SQL[]
 }
 class JoinQueryBuilder implements JoinQueryBuilderInterface {
-    constructor(private equal: EqualInterface, private operator: OperatorsConst, private isValid: IsValidInterface) {
-        this.operator.push({
-            action: this.equal.eq,
-            operator: '='
-        })
-    }
-    join(joins: Joins): any {
+    constructor(
+        private apply: ApplyJoinInterface) { }
+    join(joins: Joins): SQL | SQL[] {
         if (Array.isArray(joins[0])) {
-            return (joins as Array<JoinClause>).map(([leftColumn, operator, rightColumn]) => {
-                const operatorFn = this.operator.find(op => op.operator === operator)?.action;
-                if (!operatorFn) {
-                    throw new Error(`Operador não suportado: ${operator}`);
-                }
-                if ((!this.isValid.isValid(user.$inferInsert[leftColumn])) || (!this.isValid.isValid(empresa.$inferSelect[rightColumn]))) {
-                    throw new Error(`Join informado incorretamente`);
-                }
-                return operatorFn(user[leftColumn], empresa[rightColumn]);
-            });
+            return (joins as Array<JoinClause>).map(this.apply.apply);
         }
-        const [leftColumn, operator, rightColumn] = joins as JoinClause;
-        const operatorFn = this.operator.find(op => op.operator === operator)?.action;
-        if (!operatorFn) {
-            throw new Error(`Operador não suportado: ${operator}`);
-        }
-        if ((!this.isValid.isValid(user.$inferInsert[leftColumn])) || (!this.isValid.isValid(empresa.$inferSelect[rightColumn]))) {
-            throw new Error(`Join informado incorretamente`);
-        }
-        return operatorFn(user[leftColumn], empresa[rightColumn]);
+        return this.apply.apply(joins as JoinClause)
     }
 }
-export default new JoinQueryBuilder(equal, operators, isValid)
+export {
+    JoinQueryBuilderInterface
+}
+export default new JoinQueryBuilder(applyJoin)
