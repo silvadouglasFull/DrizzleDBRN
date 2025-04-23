@@ -1,4 +1,4 @@
-import { LessThanOperatorType } from "@dbOperators/lessThan/types";
+import { LessThanOperatorType } from "@db/filterConditionalOperators/lessThan/types";
 import { lt } from "drizzle-orm";
 
 interface LessThanOperatorInterface {

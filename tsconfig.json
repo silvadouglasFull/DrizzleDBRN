@@ -10,7 +10,7 @@
       "@dbConfig/*": ["src/database/src/shared/config/database/*"],
       "@dbInstance/*": ["src/database/src/instance/*"],
       "@dbMigrations/*": ["src/database/src/migrations/*"],
-      "@dbOperators/*": ["src/database/src/filterCconditionalOperators/*"],
+      "@dbOperators/*": ["src/database/src/filterConditionalOperators/*"],
       "@dbRepositories/*": ["src/database/src/repositories/*"],
       "@dbQueryBuilder/*": ["src/database/src/queryBuilder/*"],
       "@dbSchemas/*": ["src/database/src/schemas/*"],

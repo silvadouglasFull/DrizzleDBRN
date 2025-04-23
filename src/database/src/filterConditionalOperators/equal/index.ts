@@ -1,4 +1,4 @@
-import { EqualOperatorType } from "@dbOperators/equal/types";
+import { EqualOperatorType } from "@db/filterConditionalOperators/equal/types";
 import { eq } from "drizzle-orm";
 
 interface EqualInterface {

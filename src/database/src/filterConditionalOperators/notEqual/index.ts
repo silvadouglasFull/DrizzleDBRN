@@ -1,4 +1,4 @@
-import { NotEqualOperatorType } from "@dbOperators/notEqual/types";
+import { NotEqualOperatorType } from "@db/filterConditionalOperators/notEqual/types";
 import { ne } from "drizzle-orm";
 
 interface NotEqualInterface {

@@ -1,4 +1,4 @@
-import equal from "@dbOperators/equal";
+import equal from "@db/filterConditionalOperators/equal";
 import { eq } from "drizzle-orm";
 type EqualOperatorType = typeof eq
 type Equal = typeof equal

@@ -1,9 +1,9 @@
+import { EqualOperatorType } from "@db/filterConditionalOperators/equal/types";
+import { GreaterThanOperatorType } from "@db/filterConditionalOperators/greaterThan/types";
+import { GreaterThanOrEqualtoOperatorType } from "@db/filterConditionalOperators/greaterThanOrEqualto/types";
+import { LessThanOperatorType } from "@db/filterConditionalOperators/lessThan/types";
+import { NotEqualOperatorType } from "@db/filterConditionalOperators/notEqual/types";
 import { Operator } from "@db/queryBuilder/users/where/operators/types";
-import { EqualOperatorType } from "@dbOperators/equal/types";
-import { GreaterThanOperatorType } from "@dbOperators/greaterThan/types";
-import { GreaterThanOrEqualtoOperatorType } from "@dbOperators/greaterThanOrEqualto/types";
-import { LessThanOperatorType } from "@dbOperators/lessThan/types";
-import { NotEqualOperatorType } from "@dbOperators/notEqual/types";
 import operators from "@dbUtils/users/queryBuilder/operators/where";
 type OperatorsConst = typeof operators
 type Operators = Array<{

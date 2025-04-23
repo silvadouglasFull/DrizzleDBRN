@@ -1,4 +1,4 @@
-import greaterThanOrEqualto from "@dbOperators/greaterThanOrEqualto";
+import greaterThanOrEqualto from "@db/filterConditionalOperators/greaterThanOrEqualto";
 import { gte } from "drizzle-orm";
 type GreaterThanOrEqualtoOperatorType = typeof gte
 type GreaterThanOrEqualto = typeof greaterThanOrEqualto

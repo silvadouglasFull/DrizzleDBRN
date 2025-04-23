@@ -1,5 +1,5 @@
+import equal, { EqualInterface } from "@db/filterConditionalOperators/equal";
 import empresa from "@dbEmpresaSchema/index";
-import equal, { EqualInterface } from "@dbOperators/equal";
 import { WhereClause } from "@dbQueryBuilder/empresa/where/operators/types";
 import operators from "@dbUtils/empresa/queryBuilder/operators/where";
 import isValid, { IsValidInterface } from "@dbUtils/empresa/queryBuilder/validValue";
