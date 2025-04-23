@@ -1,6 +1,6 @@
 import { Empresa } from "@dbEmpresaSchema/types";
 
-type Operator = '=' | '>' | '<' | '>=' | '<=' | '<>' | '!=' | 'LIKE';
+type Operator = '=';
 
 type WhereClause<K extends keyof Empresa = keyof Empresa> = [K, Operator, Empresa[K]];
 

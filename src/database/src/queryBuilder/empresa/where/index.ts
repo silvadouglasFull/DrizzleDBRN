@@ -1,55 +1,22 @@
 import { WhereClause, Wheres } from "@db/queryBuilder/empresa/where/operators/types";
-import operators from "@db/utils/users/queryBuilder/operators";
-import empresa from "@dbEmpresaSchema/index";
-import equal, { EqualInterface } from "@dbOperators/equal";
-import isVaid, { IsValidInterface } from "@dbUtils/empresa/queryBuilder/validValue";
-import { OperatorsConst } from "@dbUtils/empresa/queryBuilder/where/types";
-
+import applyWhere, { ApplyWhereInterface } from "@dbQueryBuilder/empresa/where/applyWhere";
 interface WhereQueryBuilderInterface {
     where(rops: Wheres | Wheres[]): any;
 }
 class Where implements WhereQueryBuilderInterface {
     constructor(
-        private equal: EqualInterface,
-        private isValid: IsValidInterface,
-        private operator: OperatorsConst) {
-        this.operator.push(
-            {
-                action: this.equal.eq,
-                operator: '=',
-            }
-        )
+        private apply: ApplyWhereInterface
+    ) {
     }
     public where(clauses: Wheres): any {
         if (Array.isArray(clauses[0])) {
-            return (clauses as Array<WhereClause>).map(([column, operator, value]) => {
-                const operatorFn = this.operator.find(op => op.operator === operator)?.action;
-                if (!operatorFn) {
-                    throw new Error(`Operador não suportado: ${operator}`);
-                }
-                if (!this.isValid.isValid(value)) {
-                    throw new Error(`O valor ${value} da coluna ${column} não é valido`);
-                }
-                return operatorFn(empresa[column], value ?? '');
-            });
+            return (clauses as Array<WhereClause>).map(this.apply.apply);
         }
-        const [column, operator, value] = clauses as WhereClause;
-        const operatorFn = this.operator.find(op => op.operator === operator)?.action;
-        if (!operatorFn) {
-            throw new Error(`Operador não suportado: ${operator}`);
-        }
-        if (!this.isValid.isValid(value)) {
-            throw new Error(`O valor ${value} da coluna ${column} não é valido`);
-        }
-        return operatorFn(empresa[column], value ?? '');
+        return this.apply.apply(clauses as WhereClause)
     }
 
 }
 export {
     WhereQueryBuilderInterface
 };
-export default new Where(
-    equal,
-    isVaid,
-    operators
-)
+export default new Where(applyWhere)
